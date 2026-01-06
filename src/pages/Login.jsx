@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '../components/ui/Card';
 import { Input } from '../components/ui/Input';
 import { Button } from '../components/ui/Button';
@@ -8,7 +9,6 @@ import { useAuth } from '../context/AuthContext';
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const navigate = useNavigate();
   const { loginCustomer } = useAuth();
   const location = useLocation();
@@ -20,7 +20,7 @@ export default function Login() {
     if (result.success) {
       navigate(from);
     } else {
-      setError(result.message);
+      toast.error(result.message);
     }
   };
 
@@ -33,7 +33,6 @@ export default function Login() {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleLogin} className="space-y-4">
-            {error && <div className="bg-red-50 text-red-600 p-3 rounded text-sm text-center">{error}</div>}
             <div className="space-y-2">
               <label className="text-sm font-medium text-slate-700">ইমেইল</label>
               <Input 

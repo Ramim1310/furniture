@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../ui/Button';
-import { ShoppingCart, LogIn } from 'lucide-react';
+import { ShoppingCart, LogIn, Menu, X } from 'lucide-react';
+import { useState } from 'react';
 
 import { useAuth } from '../../context/AuthContext';
 
@@ -10,6 +11,7 @@ import { useShop } from '../../context/ShopContext';
 export function Navbar() {
   const { user, logout } = useAuth();
   const { cart } = useShop();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   
   return (
     <nav className="border-b bg-white sticky top-0 z-50">
@@ -31,8 +33,17 @@ export function Navbar() {
                )}
             </Button>
           </Link>
+          
+          {/* Mobile Menu Button */}
+          <button 
+            className="md:hidden p-2"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+
           {user ? (
-            <div className="flex items-center gap-4">
+            <div className="hidden md:flex items-center gap-4">
               <div className="flex items-center gap-2 group relative">
                   <div className="h-10 w-10 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-700 font-bold text-lg border cursor-pointer">
                     {user.name.charAt(0).toUpperCase()}
@@ -59,14 +70,54 @@ export function Navbar() {
               </div>
             </div>
           ) : (
-            <Link to="/login">
-              <Button variant="outline" className="hidden sm:flex items-center gap-2">
+            <Link to="/login" className="hidden md:block">
+              <Button variant="outline" className="flex items-center gap-2">
                 <LogIn className="h-4 w-4" /> লগইন
               </Button>
             </Link>
           )}
         </div>
       </div>
+
+      {/* Mobile Menu Dropdown */}
+      {isMenuOpen && (
+        <div className="md:hidden border-t p-4 bg-white shadow-lg space-y-4">
+          <Link to="/" className="block text-slate-600 hover:text-slate-900 font-medium" onClick={() => setIsMenuOpen(false)}>হোম</Link>
+          <Link to="/products" className="block text-slate-600 hover:text-slate-900 font-medium" onClick={() => setIsMenuOpen(false)}>প্রোডাক্ট</Link>
+          <Link to="/about" className="block text-slate-600 hover:text-slate-900 font-medium" onClick={() => setIsMenuOpen(false)}>আমাদের কথা</Link>
+          
+          {user ? (
+             <div className="pt-2 border-t">
+                <div className="flex items-center gap-3 mb-3">
+                   <div className="h-8 w-8 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-700 font-bold text-sm border">
+                      {user.name.charAt(0).toUpperCase()}
+                   </div>
+                   <div>
+                       <p className="text-sm font-medium">{user.name}</p>
+                       <p className="text-xs text-muted-foreground">{user.role === 'admin' ? 'অ্যাডমিন' : 'কাস্টমার'}</p>
+                   </div>
+                </div>
+                {user.role === 'admin' && (
+                  <Link to="/admin/dashboard" className="block text-indigo-600 font-medium mb-2" onClick={() => setIsMenuOpen(false)}>
+                    ড্যাশবোর্ড
+                  </Link>
+                )}
+                <button 
+                  onClick={() => { logout(); setIsMenuOpen(false); }}
+                  className="text-red-600 font-medium w-full text-left"
+                >
+                  লগআউট
+                </button>
+             </div>
+          ) : (
+            <Link to="/login" onClick={() => setIsMenuOpen(false)}>
+              <Button variant="outline" className="w-full flex items-center justify-center gap-2 mt-2">
+                <LogIn className="h-4 w-4" /> লগইন
+              </Button>
+            </Link>
+          )}
+        </div>
+      )}
     </nav>
   );
 }

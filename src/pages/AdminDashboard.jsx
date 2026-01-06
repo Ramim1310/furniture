@@ -45,7 +45,7 @@ export default function AdminDashboard() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Add Product Form */}
-        <Card className="lg:col-span-1 h-fit sticky top-24">
+        <Card className="lg:col-span-1 h-fit">
           <CardHeader>
             <CardTitle className="flex items-center gap-2"><Plus className="h-5 w-5"/> নতুন পণ্য যোগ করুন</CardTitle>
           </CardHeader>

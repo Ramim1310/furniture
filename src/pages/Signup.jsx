@@ -1,4 +1,5 @@
 import React from 'react';
+import toast from 'react-hot-toast';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '../components/ui/Card';
 import { Input } from '../components/ui/Input';
 import { Button } from '../components/ui/Button';
@@ -15,16 +16,16 @@ export default function Signup() {
     address: '',
     password: ''
   });
-  const [error, setError] = React.useState('');
 
   const handleSignup = (e) => {
     e.preventDefault();
     const result = registerCustomer(formData);
     
     if (result.success) {
+      toast.success('অ্যাকাউন্ট তৈরি সফল হয়েছে!');
       navigate('/');
     } else {
-      setError(result.message);
+      toast.error(result.message);
     }
   };
 
@@ -37,7 +38,6 @@ export default function Signup() {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSignup} className="space-y-4">
-            {error && <div className="bg-red-50 text-red-600 p-3 rounded text-sm text-center">{error}</div>}
             <div className="space-y-2">
               <label className="text-sm font-medium text-slate-700">নাম</label>
               <Input 

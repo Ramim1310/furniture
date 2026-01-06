@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/Card';
 import { Input } from '../components/ui/Input';
 import { Button } from '../components/ui/Button';
@@ -18,7 +19,7 @@ export default function AdminLogin() {
     if (result.success) {
       navigate('/admin/dashboard');
     } else {
-      alert('ভুল ইমেইল বা পাসওয়ার্ড! (Try: admin@hamza.com / hamza123)');
+      toast.error('ভুল ইমেইল বা পাসওয়ার্ড! (Try: admin@hamza.com / hamza123)');
     }
   };
 

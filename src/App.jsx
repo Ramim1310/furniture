@@ -12,20 +12,25 @@ import AdminDashboard from './pages/AdminDashboard';
 import AdminOrders from './pages/AdminOrders';
 import AdminCustomers from './pages/AdminCustomers';
 
+import { Toaster } from 'react-hot-toast';
+
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Layout><Home /></Layout>} />
-      <Route path="/products" element={<Layout><Products /></Layout>} />
-      <Route path="/cart" element={<Layout><Cart /></Layout>} />
-      <Route path="/login" element={<Layout><Login /></Layout>} />
-      <Route path="/signup" element={<Layout><Signup /></Layout>} />
-      <Route path="/about" element={<Layout><About /></Layout>} />
-      <Route path="/admin" element={<AdminLogin />} />
-      <Route path="/admin/dashboard" element={<AdminDashboard />} />
-      <Route path="/admin/orders" element={<AdminOrders />} />
-      <Route path="/admin/customers" element={<AdminCustomers />} />
-    </Routes>
+    <>
+      <Toaster position="top-center" reverseOrder={false} />
+      <Routes>
+        <Route path="/" element={<Layout><Home /></Layout>} />
+        <Route path="/products" element={<Layout><Products /></Layout>} />
+        <Route path="/cart" element={<Layout><Cart /></Layout>} />
+        <Route path="/login" element={<Layout><Login /></Layout>} />
+        <Route path="/signup" element={<Layout><Signup /></Layout>} />
+        <Route path="/about" element={<Layout><About /></Layout>} />
+        <Route path="/admin" element={<AdminLogin />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/orders" element={<AdminOrders />} />
+        <Route path="/admin/customers" element={<AdminCustomers />} />
+      </Routes>
+    </>
   );
 }
 
