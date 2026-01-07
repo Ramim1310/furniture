@@ -4,7 +4,15 @@ import { initialProducts, initialOrders } from '../data/mockData';
 const ShopContext = createContext();
 
 export function ShopProvider({ children }) {
-  const [products, setProducts] = useState(initialProducts);
+  const [products, setProducts] = useState(() => {
+    const savedProducts = localStorage.getItem('products');
+    return savedProducts ? JSON.parse(savedProducts) : initialProducts;
+  });
+
+  // Persist Products
+  React.useEffect(() => {
+    localStorage.setItem('products', JSON.stringify(products));
+  }, [products]);
   
   const [orders, setOrders] = useState(() => {
     const savedOrders = localStorage.getItem('orders');

@@ -11,16 +11,19 @@ import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminOrders from './pages/AdminOrders';
 import AdminCustomers from './pages/AdminCustomers';
-
+import ProductDetails from './pages/ProductDetails';
+import ScrollToTop from './components/shared/ScrollToTop';
 import { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
     <>
+      <ScrollToTop />
       <Toaster position="top-center" reverseOrder={false} />
       <Routes>
         <Route path="/" element={<Layout><Home /></Layout>} />
         <Route path="/products" element={<Layout><Products /></Layout>} />
+        <Route path="/product/:id" element={<Layout><ProductDetails /></Layout>} />
         <Route path="/cart" element={<Layout><Cart /></Layout>} />
         <Route path="/login" element={<Layout><Login /></Layout>} />
         <Route path="/signup" element={<Layout><Signup /></Layout>} />
