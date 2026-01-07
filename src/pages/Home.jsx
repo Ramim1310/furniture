@@ -29,9 +29,11 @@ export default function Home() {
           <p className="text-lg md:text-xl mb-8 text-gray-200">
             সেরা মানের ফার্নিচার এখন আপনার হাতের নাগালে। হামযা ফার্নিচার হাউস - বিশ্বাস ও আস্থার প্রতীক।
           </p>
-          <Button size="lg" className="bg-white text-slate-900 hover:bg-gray-100 text-lg px-8 py-6 rounded-2xl">
-            কেনাকাটা করুন <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
+          <Link to="/products">
+            <Button size="lg" className="bg-white text-slate-900 hover:bg-gray-100 text-lg px-8 py-6 rounded-2xl cursor-pointer">
+              কেনাকাটা করুন <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </Link>
         </div>
       </section>
 

@@ -46,6 +46,8 @@ Follow these steps to set up and run the project on a new machine:
     *   **Delete Order**: Permanently remove an order from the system (includes confirmation popup).
 *   **Customer List**: View a table of all registered customers and their contact info.
 
+*   **Mobile Responsive Design**
+
 ---
 
 ## 🔑 Default Credentials

@@ -12,6 +12,14 @@ export function Navbar() {
   const { user, logout } = useAuth();
   const { cart } = useShop();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [animate, setAnimate] = useState(false);
+
+  React.useEffect(() => {
+    if (cart.length === 0) return;
+    setAnimate(true);
+    const timer = setTimeout(() => setAnimate(false), 300);
+    return () => clearTimeout(timer);
+  }, [cart.length]);
   
   return (
     <nav className="border-b bg-white sticky top-0 z-50">
@@ -24,8 +32,8 @@ export function Navbar() {
         </div>
         <div className="flex items-center space-x-4">
           <Link to="/cart" className="relative">
-            <Button variant="ghost" size="icon">
-               <ShoppingCart className="h-5 w-5" />
+            <Button variant="ghost" size="icon" className={`${animate ? 'scale-125 text-indigo-600 bg-indigo-50' : ''} transition-all duration-300`}>
+               <ShoppingCart className={`h-5 w-5 ${animate ? 'fill-indigo-600' : ''}`} />
                {cart.length > 0 && (
                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
                    {cart.length}
